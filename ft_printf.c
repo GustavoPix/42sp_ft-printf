@@ -52,6 +52,10 @@ int	ft_printf(const char *str, ...)
 				ft_putnbr_fd(va_arg(list, int), 1);
 			else if (str[i + 1] == 'u')
 				ft_putnbr_fd(va_arg(list, unsigned int), 1);
+			else if (str[i + 1] == 'x')
+				prf_decToBase(va_arg(list, unsigned int), "0123456789abcdef");
+			else if (str[i + 1] == '%')
+				ft_putchar_fd('%', 1);
 			i++;
 		}
 		else
