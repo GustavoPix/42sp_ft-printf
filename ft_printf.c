@@ -50,6 +50,8 @@ int	ft_printf(const char *str, ...)
 			}
 			else if (str[i + 1] == 'i' || str[i + 1] == 'd')
 				ft_putnbr_fd(va_arg(list, int), 1);
+			else if (str[i + 1] == 'u')
+				ft_putnbr_fd(va_arg(list, unsigned int), 1);
 			i++;
 		}
 		else
