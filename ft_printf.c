@@ -26,6 +26,8 @@ int	ft_printf(const char *str, ...)
 		{
 			if (str[i + 1] == 's')
 				ft_putstr_fd(va_arg(list, char *), 1);
+			else if (str[i + 1] == 'c')
+				ft_putchar_fd(va_arg(list, int), 1);
 			i++;
 		}
 		else
