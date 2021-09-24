@@ -13,9 +13,9 @@
 #include "libft/libft.h"
 #include "ft_printf.h"
 
-static void	prf_decToBase(unsigned long nbr, const char *base)
+static void	prf_decToBase(long nbr, const char *base)
 {
-	if (nbr >= (unsigned long)ft_strlen(base))
+	if (nbr >= (long)ft_strlen(base) || nbr <= (long)ft_strlen(base) * -1)
 	{
 		prf_decToBase(nbr / ft_strlen(base), base);
 		prf_decToBase(nbr % ft_strlen(base), base);
@@ -48,6 +48,8 @@ int	ft_printf(const char *str, ...)
 				ft_putstr_fd("0x", 1);
 				prf_decToBase(va_arg(list, unsigned long), "0123456789abcdef");
 			}
+			else if (str[i + 1] == 'i' || str[i + 1] == 'd')
+				ft_putnbr_fd(va_arg(list, int), 1);
 			i++;
 		}
 		else
