@@ -72,6 +72,6 @@ fclean:		clean
 re:			fclean all
 
 test:
-			${COMPILER} ${FLAGS} -L. ${SRCS}  main.c
+			${COMPILER} -g ${FLAGS} -L. ${SRCS}  main.c && valgrind ./a.out
 
 .PHONY:		all clean fclean re test

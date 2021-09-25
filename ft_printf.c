@@ -13,18 +13,20 @@
 #include "libft/libft.h"
 #include "ft_printf.h"
 
-static void	prf_decToBase(long nbr, const char *base)
+static int	prf_decToBase(unsigned long nbr, const char *base)
 {
-	if (nbr >= (long)ft_strlen(base) || nbr <= (long)ft_strlen(base) * -1)
+	int s = 1;
+	if (nbr >= (unsigned long)ft_strlen(base)/* || nbr <= (long)ft_strlen(base) * -1*/)
 	{
-		prf_decToBase(nbr / ft_strlen(base), base);
-		prf_decToBase(nbr % ft_strlen(base), base);
+		s = prf_decToBase(nbr / ft_strlen(base), base);
+		return (s + prf_decToBase(nbr % ft_strlen(base), base));
 	}
 	else
 	{
 		if (nbr < 0)
 			nbr *= -1;
 		ft_putchar_fd(base[nbr], 1);
+		return (s);
 	}
 }
 
@@ -37,8 +39,17 @@ static int ft_print_s(char *str)
 	}
 	ft_putstr_fd("(null)", 1);
 	return (4);
+}
 
-
+static int ft_print_p(unsigned long pointer)
+{
+	if (pointer)
+	{
+		ft_putstr_fd("0x", 1);
+		return (prf_decToBase(pointer, "0123456789abcdef"));
+	}
+	ft_putstr_fd("(nil)", 1);
+	return (3);
 }
 
 int	ft_printf(const char *str, ...)
@@ -62,10 +73,7 @@ int	ft_printf(const char *str, ...)
 				a-=1;
 			}
 			else if (str[i + 1] == 'p')
-			{
-				ft_putstr_fd("0x", 1);
-				prf_decToBase(va_arg(list, unsigned long), "0123456789abcdef");
-			}
+				a += ft_print_p(va_arg(list, unsigned long));
 			else if (str[i + 1] == 'i' || str[i + 1] == 'd')
 				ft_putnbr_fd(va_arg(list, int), 1);
 			else if (str[i + 1] == 'u')
