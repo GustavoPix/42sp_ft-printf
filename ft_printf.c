@@ -31,10 +31,12 @@ static void	prf_decToBase(long nbr, const char *base)
 int	ft_printf(const char *str, ...)
 {
 	int		i;
+	int		a;
 	va_list	list;
 
 	va_start(list, str);
 	i = 0;
+	a = 0;
 	while (str[i])
 	{
 		if (str[i] == '%')
@@ -59,10 +61,11 @@ int	ft_printf(const char *str, ...)
 			else if (str[i + 1] == '%')
 				ft_putchar_fd('%', 1);
 			i++;
+			a++;
 		}
 		else
 			ft_putchar_fd(str[i], 1);
 		i++;
 	}
-	return (1);
+	return (i - a);
 }
