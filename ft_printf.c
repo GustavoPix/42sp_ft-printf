@@ -28,6 +28,19 @@ static void	prf_decToBase(long nbr, const char *base)
 	}
 }
 
+static int ft_print_s(char *str)
+{
+	if (str)
+	{
+		ft_putstr_fd(str, 1);
+		return (ft_strlen(str) - 2);
+	}
+	ft_putstr_fd("(null)", 1);
+	return (4);
+
+
+}
+
 int	ft_printf(const char *str, ...)
 {
 	int		i;
@@ -42,9 +55,12 @@ int	ft_printf(const char *str, ...)
 		if (str[i] == '%')
 		{
 			if (str[i + 1] == 's')
-				ft_putstr_fd(va_arg(list, char *), 1);
+				a += ft_print_s(va_arg(list, char *));
 			else if (str[i + 1] == 'c')
+			{
 				ft_putchar_fd(va_arg(list, int), 1);
+				a-=1;
+			}
 			else if (str[i + 1] == 'p')
 			{
 				ft_putstr_fd("0x", 1);
@@ -61,11 +77,10 @@ int	ft_printf(const char *str, ...)
 			else if (str[i + 1] == '%')
 				ft_putchar_fd('%', 1);
 			i++;
-			a++;
 		}
 		else
 			ft_putchar_fd(str[i], 1);
 		i++;
 	}
-	return (i - a);
+	return (i + a);
 }
