@@ -27,6 +27,7 @@ LIBFT = 	libft/ft_atoi.c \
 		libft/ft_putchar_fd.c \
 		libft/ft_putendl_fd.c \
 		libft/ft_putnbr_fd.c \
+		libft/ft_putunbr_fd.c \
 		libft/ft_putstr_fd.c \
 		libft/ft_split.c \
 		libft/ft_strchr.c \

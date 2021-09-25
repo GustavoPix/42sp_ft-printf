@@ -68,6 +68,22 @@ static int ft_print_d(int n)
 	return (s);
 }
 
+static int ft_print_u(unsigned int n)
+{
+	int s;
+
+	s = -1;
+	ft_putunbr_fd(n, 1);
+	while (n >= 10)
+	{
+		s++;
+		n /= 10;
+	}
+	if (n < 0)
+		s++;
+	return (s);
+}
+
 int	ft_printf(const char *str, ...)
 {
 	int		i;
@@ -93,7 +109,7 @@ int	ft_printf(const char *str, ...)
 			else if (str[i + 1] == 'i' || str[i + 1] == 'd')
 				a += ft_print_d(va_arg(list, int));
 			else if (str[i + 1] == 'u')
-				ft_putnbr_fd(va_arg(list, unsigned int), 1);
+				a += ft_print_u(va_arg(list, unsigned int));
 			else if (str[i + 1] == 'x')
 				prf_decToBase(va_arg(list, unsigned int), "0123456789abcdef");
 			else if (str[i + 1] == 'X')

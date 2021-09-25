@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/28 11:15:35 by glima-de          #+#    #+#             */
-/*   Updated: 2021/09/23 19:59:27 by glima-de         ###   ########.fr       */
+/*   Updated: 2021/09/25 15:24:42 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ char			*ft_strdup(const char *s);
 unsigned int	ft_strlen(const char *str);
 void			ft_bzero(void *s, size_t n);
 void			ft_putnbr_fd(int n, int fd);
+void			ft_putunbr_fd(unsigned int n, int fd);
 void			ft_putstr_fd(char *s, int fd);
 void			ft_putchar_fd(char c, int fd);
 void			ft_putendl_fd(char *s, int fd);
