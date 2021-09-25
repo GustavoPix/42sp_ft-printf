@@ -47,9 +47,16 @@ LIBFT = 	libft/ft_atoi.c \
 		libft/ft_toupper.c \
 		libft/ft_memcmp.c
 
+PRF_UTILS = utils/prf_decToBase.c \
+		utils/prf_print_d.c \
+		utils/prf_print_p.c \
+		utils/prf_print_s.c \
+		utils/prf_print_u.c \
+		utils/prf_print_x.c
+
 FTPRINTF = ft_printf.c
 
-SRCS = ${LIBFT} ${FTPRINTF}
+SRCS = ${LIBFT} ${PRF_UTILS} ${FTPRINTF}
 
 OBJS = ${SRCS:.c=.o}
 NAME = libftprintf.a
@@ -59,6 +66,8 @@ FLAGS = -Wall -Wextra -Werror
 $(NAME):
 			${COMPILER} ${FLAGS} -c  ${LIBFT}
 			mv *.o Libft/
+			${COMPILER} ${FLAGS} -c  ${PRF_UTILS}
+			mv *.o utils/
 			${COMPILER} ${FLAGS} -c  ${FTPRINTF}
 			ar rcs ${NAME} ${OBJS}
 

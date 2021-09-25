@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   prf_print_p.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/24 15:28:06 by glima-de          #+#    #+#             */
-/*   Updated: 2021/09/25 17:09:27 by glima-de         ###   ########.fr       */
+/*   Created: 2021/09/25 16:27:16 by glima-de          #+#    #+#             */
+/*   Updated: 2021/09/25 16:40:38 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdarg.h>
+#include "../libft/libft.h"
+#include "../ft_printf.h"
 
-int	ft_printf(const char *str, ...);
-int	prf_print_d(int n);
-int	prf_print_s(char *str);
-int	prf_print_u(unsigned int n);
-int	prf_print_p(unsigned long pointer);
-int	prf_decToBase(unsigned long nbr, const char *base);
-int	prf_print_x(unsigned long pointer, const char *base);
-
-#endif
+int	prf_print_p(unsigned long pointer)
+{
+	if (pointer)
+	{
+		ft_putstr_fd("0x", 1);
+		return (prf_decToBase(pointer, "0123456789abcdef"));
+	}
+	ft_putstr_fd("(nil)", 1);
+	return (3);
+}

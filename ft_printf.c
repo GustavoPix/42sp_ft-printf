@@ -13,80 +13,46 @@
 #include "libft/libft.h"
 #include "ft_printf.h"
 
-static int	prf_decToBase(unsigned long nbr, const char *base)
+static int	prf_treatment_uint(unsigned int value, char c)
 {
-	int s = 1;
-	if (nbr >= (unsigned long)ft_strlen(base)/* || nbr <= (long)ft_strlen(base) * -1*/)
-	{
-		s = prf_decToBase(nbr / ft_strlen(base), base);
-		return (s + prf_decToBase(nbr % ft_strlen(base), base));
-	}
+	if (c == 'u')
+		return (prf_print_u(value));
+	else if (c == 'x')
+		return (prf_print_x(value, "0123456789abcdef"));
+	else if (c == 'X')
+		return (prf_print_x(value, "0123456789ABCDEF"));
 	else
-	{
-		if (nbr < 0)
-			nbr *= -1;
-		ft_putchar_fd(base[nbr], 1);
-		return (s);
-	}
+		return (0);
 }
 
-static int ft_print_s(char *str)
+static int	prf_isUnsg_Int(char c)
 {
-	if (str)
-	{
-		ft_putstr_fd(str, 1);
-		return (ft_strlen(str) - 2);
-	}
-	ft_putstr_fd("(null)", 1);
-	return (4);
+	if (c == 'u' || c == 'x' || c == 'X')
+		return (1);
+	return (0);
 }
 
-static int ft_print_p(unsigned long pointer)
+static int	prf_print_arg(va_list *list, char c)
 {
-	if (pointer)
+	if (c == 's')
+		return (prf_print_s(va_arg(*list, char *)));
+	else if (c == 'c')
 	{
-		ft_putstr_fd("0x", 1);
-		return (prf_decToBase(pointer, "0123456789abcdef") );
+		ft_putchar_fd(va_arg(*list, int), 1);
+		return (-1);
 	}
-	ft_putstr_fd("(nil)", 1);
-	return (3);
-}
-
-static int ft_print_x(unsigned long pointer, const char *base)
-{
-	return (prf_decToBase(pointer, base) - 2);
-}
-
-static int ft_print_d(int n)
-{
-	int s;
-
-	s = -1;
-	ft_putnbr_fd(n, 1);
-	while (n <= -10 || n >= 10)
+	else if (c == 'p')
+		return (prf_print_p(va_arg(*list, unsigned long)));
+	else if (c == 'i' || c == 'd')
+		return (prf_print_d(va_arg(*list, int)));
+	else if (prf_isUnsg_Int(c) == 1)
+		return (prf_treatment_uint(va_arg(*list, unsigned int), c));
+	else if (c == '%')
 	{
-		s++;
-		n /= 10;
+		ft_putchar_fd('%', 1);
+		return (-1);
 	}
-	if (n < 0)
-		s++;
-	return (s);
-}
-
-static int ft_print_u(unsigned int n)
-{
-	int s;
-
-	s = -1;
-	ft_putunbr_fd(n, 1);
-	while (n >= 10)
-	{
-		s++;
-		n /= 10;
-	}
-	if (n < 0)
-		s++;
-	return (s);
+	return (0);
 }
 
 int	ft_printf(const char *str, ...)
@@ -102,28 +68,7 @@ int	ft_printf(const char *str, ...)
 	{
 		if (str[i] == '%')
 		{
-			if (str[i + 1] == 's')
-				a += ft_print_s(va_arg(list, char *));
-			else if (str[i + 1] == 'c')
-			{
-				ft_putchar_fd(va_arg(list, int), 1);
-				a-=1;
-			}
-			else if (str[i + 1] == 'p')
-				a += ft_print_p(va_arg(list, unsigned long));
-			else if (str[i + 1] == 'i' || str[i + 1] == 'd')
-				a += ft_print_d(va_arg(list, int));
-			else if (str[i + 1] == 'u')
-				a += ft_print_u(va_arg(list, unsigned int));
-			else if (str[i + 1] == 'x')
-				a += ft_print_x(va_arg(list, unsigned int), "0123456789abcdef");
-			else if (str[i + 1] == 'X')
-				a += ft_print_x(va_arg(list, unsigned int), "0123456789ABCDEF");
-			else if (str[i + 1] == '%')
-			{
-				ft_putchar_fd('%', 1);
-				a -= 1;
-			}
+			a += prf_print_arg(&list, str[i + 1]);
 			i++;
 		}
 		else

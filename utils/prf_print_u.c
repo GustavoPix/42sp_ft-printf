@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   prf_print_u.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/24 15:28:06 by glima-de          #+#    #+#             */
-/*   Updated: 2021/09/25 17:09:27 by glima-de         ###   ########.fr       */
+/*   Created: 2021/09/25 16:27:47 by glima-de          #+#    #+#             */
+/*   Updated: 2021/09/25 16:40:47 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdarg.h>
+#include "../libft/libft.h"
+#include "../ft_printf.h"
 
-int	ft_printf(const char *str, ...);
-int	prf_print_d(int n);
-int	prf_print_s(char *str);
-int	prf_print_u(unsigned int n);
-int	prf_print_p(unsigned long pointer);
-int	prf_decToBase(unsigned long nbr, const char *base);
-int	prf_print_x(unsigned long pointer, const char *base);
+int	prf_print_u(unsigned int n)
+{
+	int	s;
 
-#endif
+	s = -1;
+	ft_putunbr_fd(n, 1);
+	while (n >= 10)
+	{
+		s++;
+		n /= 10;
+	}
+	if (n < 0)
+		s++;
+	return (s);
+}
