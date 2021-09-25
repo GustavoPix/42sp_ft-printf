@@ -46,10 +46,15 @@ static int ft_print_p(unsigned long pointer)
 	if (pointer)
 	{
 		ft_putstr_fd("0x", 1);
-		return (prf_decToBase(pointer, "0123456789abcdef"));
+		return (prf_decToBase(pointer, "0123456789abcdef") );
 	}
 	ft_putstr_fd("(nil)", 1);
 	return (3);
+}
+
+static int ft_print_x(unsigned long pointer, const char *base)
+{
+	return (prf_decToBase(pointer, base) - 2);
 }
 
 static int ft_print_d(int n)
@@ -111,11 +116,14 @@ int	ft_printf(const char *str, ...)
 			else if (str[i + 1] == 'u')
 				a += ft_print_u(va_arg(list, unsigned int));
 			else if (str[i + 1] == 'x')
-				prf_decToBase(va_arg(list, unsigned int), "0123456789abcdef");
+				a += ft_print_x(va_arg(list, unsigned int), "0123456789abcdef");
 			else if (str[i + 1] == 'X')
-				prf_decToBase(va_arg(list, unsigned int), "0123456789ABCDEF");
+				a += ft_print_x(va_arg(list, unsigned int), "0123456789ABCDEF");
 			else if (str[i + 1] == '%')
+			{
 				ft_putchar_fd('%', 1);
+				a -= 1;
+			}
 			i++;
 		}
 		else
