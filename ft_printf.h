@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/24 15:28:06 by glima-de          #+#    #+#             */
-/*   Updated: 2021/09/25 17:09:27 by glima-de         ###   ########.fr       */
+/*   Updated: 2021/10/06 18:12:47 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	prf_print_d(int n);
 int	prf_print_s(char *str);
 int	prf_print_u(unsigned int n);
 int	prf_print_p(unsigned long pointer);
-int	prf_decToBase(unsigned long nbr, const char *base);
+int	prf_dec_to_base(unsigned long nbr, const char *base);
 int	prf_print_x(unsigned long pointer, const char *base);
 
 #endif
