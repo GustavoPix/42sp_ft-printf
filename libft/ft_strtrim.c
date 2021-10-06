@@ -6,13 +6,13 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 19:56:23 by glima-de          #+#    #+#             */
-/*   Updated: 2021/09/04 16:15:44 by glima-de         ###   ########.fr       */
+/*   Updated: 2021/10/06 13:59:21 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	gc_toRemoveLeft(char const *str, char const *set)
+static int	gc_to_remove_left(char const *str, char const *set)
 {
 	int	i;
 	int	iset;
@@ -35,7 +35,7 @@ static int	gc_toRemoveLeft(char const *str, char const *set)
 	return (i);
 }
 
-static int	gc_toRemoveRight(char const *str, char const *set)
+static int	gc_to_remove_right(char const *str, char const *set)
 {
 	int	i;
 	int	iset;
@@ -61,25 +61,25 @@ static int	gc_toRemoveRight(char const *str, char const *set)
 char	*ft_strtrim(char const *s1, char const *set)
 {
 	char			*aux;
-	unsigned int	lRemove;
-	unsigned int	rRemove;
+	unsigned int	l_remove;
+	unsigned int	r_remove;
 	int				i;
 
-	lRemove = gc_toRemoveLeft(s1, set);
-	if (lRemove >= ft_strlen(s1))
+	l_remove = gc_to_remove_left(s1, set);
+	if (l_remove >= ft_strlen(s1))
 	{
 		aux = malloc(1 * sizeof(char));
 		aux[0] = '\0';
 		return (aux);
 	}
-	rRemove = gc_toRemoveRight(s1, set);
+	r_remove = gc_to_remove_right(s1, set);
 	i = 0;
-	aux = malloc((rRemove - lRemove + 1) * sizeof(char));
+	aux = malloc((r_remove - l_remove + 1) * sizeof(char));
 	if (!aux)
 		return (NULL);
-	while (s1[i + lRemove] && i + lRemove < rRemove)
+	while (s1[i + l_remove] && i + l_remove < r_remove)
 	{
-		aux[i] = s1[i + lRemove];
+		aux[i] = s1[i + l_remove];
 		i++;
 	}
 	aux[i] = '\0';

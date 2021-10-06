@@ -47,7 +47,7 @@ LIBFT = 	libft/ft_atoi.c \
 		libft/ft_toupper.c \
 		libft/ft_memcmp.c
 
-PRF_UTILS = utils/prf_decToBase.c \
+PRF_UTILS = utils/prf_dectobase.c \
 		utils/prf_print_d.c \
 		utils/prf_print_p.c \
 		utils/prf_print_s.c \

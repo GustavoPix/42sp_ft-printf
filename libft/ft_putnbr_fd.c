@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/26 20:05:40 by glima-de          #+#    #+#             */
-/*   Updated: 2021/09/11 13:57:34 by glima-de         ###   ########.fr       */
+/*   Updated: 2021/10/06 13:56:08 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ static void	ft_putchar(char c, int fd)
 	write(fd, &c, 1);
 }
 
-static void	loopToPrint(int nb, int fd)
+static void	loop_to_print(int nb, int fd)
 {
 	char	c;
 
 	if (nb >= 10 || nb <= -10)
 	{
-		loopToPrint(nb / 10, fd);
-		loopToPrint(nb % 10, fd);
+		loop_to_print(nb / 10, fd);
+		loop_to_print(nb % 10, fd);
 	}
 	else
 	{
@@ -39,5 +39,5 @@ void	ft_putnbr_fd(int n, int fd)
 {
 	if (n < 0)
 		ft_putchar('-', fd);
-	loopToPrint(n, fd);
+	loop_to_print(n, fd);
 }

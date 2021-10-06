@@ -6,20 +6,20 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/26 18:15:16 by glima-de          #+#    #+#             */
-/*   Updated: 2021/09/01 19:50:24 by glima-de         ###   ########.fr       */
+/*   Updated: 2021/10/06 13:55:32 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char	*gc_intToChar(int n, size_t s)
+static char	*gc_int_to_char(int n, size_t s)
 {
 	char	*aux;
 	int		i;
 
 	i = 0;
 	if (n > 9 || n < -9)
-		aux = gc_intToChar(n / 10, s + 1);
+		aux = gc_int_to_char(n / 10, s + 1);
 	else
 	{
 		aux = ft_calloc(s + 1, sizeof(char));
@@ -48,7 +48,7 @@ char	*ft_itoa(int n)
 	i = 1;
 	if (n < 0)
 		i++;
-	aux = gc_intToChar(n, i);
+	aux = gc_int_to_char(n, i);
 	while (aux[i])
 		i++;
 	aux[i] = '\0';

@@ -6,13 +6,13 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/25 18:55:06 by glima-de          #+#    #+#             */
-/*   Updated: 2021/09/01 20:10:08 by glima-de         ###   ########.fr       */
+/*   Updated: 2021/10/06 13:57:55 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	gc_numWords(char const *s, char c)
+static int	gc_num_words(char const *s, char c)
 {
 	int	qty;
 	int	i;
@@ -38,7 +38,7 @@ static int	gc_numWords(char const *s, char c)
 	return (qty);
 }
 
-static char	*gc_copyWord(char const *s, int qty)
+static char	*gc_copy_word(char const *s, int qty)
 {
 	char	*aux;
 	int		i;
@@ -54,7 +54,7 @@ static char	*gc_copyWord(char const *s, int qty)
 	return (aux);
 }
 
-static void	gc_populateWords(char const *s, char c, char **tab)
+static void	gc_populate_words(char const *s, char c, char **tab)
 {
 	int	i;
 	int	it;
@@ -69,7 +69,7 @@ static void	gc_populateWords(char const *s, char c, char **tab)
 		{
 			if (sw > 0)
 			{
-				tab[it] = gc_copyWord(&s[i - sw], sw);
+				tab[it] = gc_copy_word(&s[i - sw], sw);
 				it++;
 			}
 			sw = 0;
@@ -79,17 +79,17 @@ static void	gc_populateWords(char const *s, char c, char **tab)
 		i++;
 	}
 	if (sw > 0)
-		tab[it] = gc_copyWord(&s[i - sw], sw);
+		tab[it] = gc_copy_word(&s[i - sw], sw);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	int		qtyWords;
+	int		qty_words;
 	char	**aux;
 
-	qtyWords = gc_numWords(s, c);
-	aux = malloc((qtyWords + 1) * sizeof(char *));
-	gc_populateWords(s, c, aux);
-	aux[qtyWords] = NULL;
+	qty_words = gc_num_words(s, c);
+	aux = malloc((qty_words + 1) * sizeof(char *));
+	gc_populate_words(s, c, aux);
+	aux[qty_words] = NULL;
 	return (aux);
 }
