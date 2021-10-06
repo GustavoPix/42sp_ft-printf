@@ -75,5 +75,6 @@ int	ft_printf(const char *str, ...)
 			ft_putchar_fd(str[i], 1);
 		i++;
 	}
+	va_end(list);
 	return (i + a);
 }
