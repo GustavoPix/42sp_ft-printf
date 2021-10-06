@@ -25,7 +25,7 @@ static int	prf_treatment_uint(unsigned int value, char c)
 		return (0);
 }
 
-static int	prf_is_unsg_int(char c)
+static int	prf_is_unsig_int(char c)
 {
 	if (c == 'u' || c == 'x' || c == 'X')
 		return (1);
@@ -45,7 +45,7 @@ static int	prf_print_arg(va_list *list, char c)
 		return (prf_print_p(va_arg(*list, unsigned long)));
 	else if (c == 'i' || c == 'd')
 		return (prf_print_d(va_arg(*list, int)));
-	else if (prf_is_unsg_int(c) == 1)
+	else if (prf_is_unsig_int(c) == 1)
 		return (prf_treatment_uint(va_arg(*list, unsigned int), c));
 	else if (c == '%')
 	{
